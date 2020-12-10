@@ -57,7 +57,7 @@ class MyGame(arcade.Window):
         #obstacles
         self.obstacle_list = arcade.SpriteList()
 
-        self.obstacle = arcade.Sprite("Obstacle/obstacle.png",)
+        self.obstacle = arcade.Sprite("Obstacle/obstacle.png")
         self.obstacle.scale = 0.6
         self.obstacle.center_x = 880
         self.obstacle.center_y = 272
