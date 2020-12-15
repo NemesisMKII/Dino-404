@@ -37,7 +37,7 @@ class MyGame(arcade.Window):
         self.player_list.append(self.player)
 
         self.ground_list = arcade.SpriteList()
-
+        
         self.ground = ground.draw_ground()
 
         self.ground_list.append(self.ground)
@@ -49,8 +49,13 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.ground_list.draw()
 
-    def on_update(self, delta_tiem):
-        pass
+    def on_update(self, delta_time):
+        for item in self.ground_list:
+            item.center_x -= SCROLLING_SPEED
+            if item.center_x + item.width // 2 <= 0:
+                item.kill()
+                new_ground = ground.draw_ground()
+                self.ground_list.append(new_ground)
 
 def main():
     window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
