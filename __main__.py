@@ -57,7 +57,6 @@ class MyGame(arcade.Window):
 
     def on_update(self, delta_time):
         for item in self.ground_list:
-            item.center_x -= SCROLLING_SPEED
             if item.right <= 0:
                 item.center_x = item.width // 2 + SCREEN_WIDTH * 2
 

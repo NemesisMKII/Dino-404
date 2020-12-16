@@ -8,8 +8,7 @@ class Ground(arcade.Sprite):
 
         self.state = 0
         self.current_ground = ["Background/ground_1.png","Background/ground_2.png","Background/ground_3.png"]
-        self.speed = 10
-        self.initialisation = True
+        self.speed = -10
         
     def draw_ground(self):
         #function that draw ground using self.state to get the right ground part.It returns a sprite.
@@ -31,4 +30,4 @@ class Ground(arcade.Sprite):
         return self.ground
 
     def update(self):
-        pass
+        self.center_x += self.speed
