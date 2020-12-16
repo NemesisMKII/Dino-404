@@ -1,4 +1,5 @@
 import arcade
+import __main__
 
 class Ground(arcade.Sprite):
 
@@ -8,12 +9,24 @@ class Ground(arcade.Sprite):
         self.state = 0
         self.current_ground = ["Background/ground_1.png","Background/ground_2.png","Background/ground_3.png"]
         self.speed = 10
+        self.initialisation = True
         
     def draw_ground(self):
-        #ground initialization
-        self.ground = arcade.Sprite(self.current_ground[self.state])
-        self.ground.center_x = self.ground.width // 2 + 2560
-        self.ground.center_y = self.ground.height // 2
+        #function that draw ground using self.state to get the right ground part.It returns a sprite.
+        if self.state == 0:
+            self.ground = arcade.Sprite(self.current_ground[self.state])
+            self.ground.center_x = self.ground.width // 2 
+            self.ground.center_y = self.ground.height // 2
+
+        if self.state == 1:
+            self.ground = arcade.Sprite(self.current_ground[self.state])
+            self.ground.center_x = self.ground.width // 2 + 1280
+            self.ground.center_y = self.ground.height // 2
+
+        if self.state == 2:
+            self.ground = arcade.Sprite(self.current_ground[self.state])
+            self.ground.center_x = self.ground.width // 2 + 2560
+            self.ground.center_y = self.ground.height // 2
 
         return self.ground
 
