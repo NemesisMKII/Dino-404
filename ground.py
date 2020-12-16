@@ -1,5 +1,6 @@
 import arcade
 import __main__
+import os
 
 class Ground(arcade.Sprite):
 
@@ -7,7 +8,9 @@ class Ground(arcade.Sprite):
         super().__init__(filename=filename, scale=scale, image_x=image_x, image_y=image_y, image_width=image_width, image_height=image_height, center_x=center_x, center_y=center_y)
 
         self.state = 0
-        self.current_ground = ["Background/ground_1.png","Background/ground_2.png","Background/ground_3.png"]
+        self.current_ground = ["Data" + os.sep + "Assets" + os.sep + "Background" + os.sep + "ground_1.png",
+                               "Data" + os.sep + "Assets" + os.sep + "Background" + os.sep + "ground_2.png", 
+                               "Data" + os.sep + "Assets" + os.sep + "Background" + os.sep + "ground_3.png"]
         self.speed = -10
         
     def draw_ground(self):

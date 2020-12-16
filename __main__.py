@@ -1,6 +1,8 @@
 import arcade
+import os
 from random import randint
 from ground import Ground
+from obstacle import Obstacle
 
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
@@ -22,6 +24,7 @@ class MyGame(arcade.Window):
 
         self.player_list = None
         self.ground_list = None
+        self.obstacle_list = None
     
     def setup(self):
         #initialization score
@@ -30,9 +33,9 @@ class MyGame(arcade.Window):
         #player initialization
         self.player_list = arcade.SpriteList()
 
-        self.player = arcade.Sprite("charac.png")
-        self.player.center_x = 500
-        self.player.center_y = 278
+        self.player = arcade.Sprite("Data" + os.sep + "Assets" + os.sep + "Sprites" + os.sep + "player.png")
+        self.player.center_x = 250
+        self.player.center_y = 270
         self.player.scale = 0.6
 
         self.player_list.append(self.player)
@@ -47,6 +50,12 @@ class MyGame(arcade.Window):
             ground.state += 1
             if ground.state > 2:
                 ground.state = 0
+
+        self.obstacle_list = arcade.SpriteList()
+
+        start_obstacle = Obstacle.draw_obstacle(750,270)
+
+        self.obstacle_list.append(start_obstacle)
         
     def on_draw(self):
         arcade.set_background_color(arcade.color.BLUE_GREEN)
@@ -54,11 +63,19 @@ class MyGame(arcade.Window):
         #draw things here
         self.player_list.draw()
         self.ground_list.draw()
+        self.obstacle_list.draw()
 
     def on_update(self, delta_time):
+        self.obstacle_list.update()
         for item in self.ground_list:
+            item.center_x -= SCROLLING_SPEED
             if item.right <= 0:
                 item.center_x = item.width // 2 + SCREEN_WIDTH * 2
+        for item in self.obstacle_list:
+            if item.right <= 0:
+                item.kill()
+                new_obstacle = Obstacle.draw_obstacle(750,270)
+                self.obstacle_list.append(new_obstacle)
 
 def main():
     window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
