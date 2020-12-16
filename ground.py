@@ -12,7 +12,7 @@ class Ground(arcade.Sprite):
     def draw_ground(self):
         #ground initialization
         self.ground = arcade.Sprite(self.current_ground[self.state])
-        self.ground.center_x = self.ground.width // 2
+        self.ground.center_x = self.ground.width // 2 + 2560
         self.ground.center_y = self.ground.height // 2
 
         return self.ground
