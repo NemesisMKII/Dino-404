@@ -56,6 +56,14 @@ class MyGame(arcade.Window):
         start_obstacle = Obstacle.draw_obstacle(750,270)
 
         self.obstacle_list.append(start_obstacle)
+
+        #physics engine initialization
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player,self.ground_list, gravity_constant=0.45)
+
+    def on_key_press(self, key, modifiers):
+        if key == arcade.key.UP or key == arcade.key.SPACE:
+            if self.physics_engine.can_jump():
+                self.player.change_y = 12
         
     def on_draw(self):
         arcade.set_background_color(arcade.color.BLUE_GREEN)
@@ -67,6 +75,7 @@ class MyGame(arcade.Window):
 
     def on_update(self, delta_time):
         self.obstacle_list.update()
+        self.physics_engine.update()
         for item in self.ground_list:
             item.center_x -= SCROLLING_SPEED
             if item.right <= 0:
