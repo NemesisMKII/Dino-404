@@ -72,6 +72,8 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.ground_list.draw()
         self.obstacle_list.draw()
+        output = f"Score: {self.score}"
+        arcade.draw_text(output, 640, 680, arcade.color.WHITE, 28,anchor_x="center",anchor_y="center")
 
     def on_update(self, delta_time):
         self.obstacle_list.update()
@@ -85,6 +87,11 @@ class MyGame(arcade.Window):
                 item.kill()
                 new_obstacle = Obstacle.draw_obstacle(750,270)
                 self.obstacle_list.append(new_obstacle)
+            if self.player.center_x >= item.center_x and item.jumped == False:
+                self.score += 1
+                item.jumped = True
+        if arcade.check_for_collision_with_list(self.player, self.obstacle_list):
+            quit()
 
 def main():
     window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
